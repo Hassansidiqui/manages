@@ -16,14 +16,14 @@
         <div class="container">
             <nav>
                 <div class="logo">MHS</div>
-                <ul class="nav-links nav-links li:hover ">
+                <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="assets/cv.png" download="MHS_CV.png" class="btn download-btn"
+                    <li><a href="assets/cv.png" download="MHS_CV.png" id="download-cv" class="btn download-btn"
                             style="padding: 8px 20px; font-size: 0.9rem; background-color: var(--primary); color: var(--bg-primary); border: 1px solid var(--primary);">Download
                             CV</a></li>
                     <li><button id="theme-toggle"
@@ -267,8 +267,49 @@
             } else {
                 themeIcon.classList.remove('fa-sun');
                 themeIcon.classList.add('fa-moon');
+                themeIcon.classList.add('fa-moon');
             }
         }
+
+        // Force Download for CV
+        document.getElementById('download-cv').addEventListener('click', async function (e) {
+            e.preventDefault();
+            const btn = this;
+            const originalText = btn.innerText;
+            const url = btn.getAttribute('href');
+
+            // Visual feedback
+            btn.innerText = 'Downloading...';
+            btn.style.opacity = '0.7';
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const blob = await response.blob();
+                const blobUrl = window.URL.createObjectURL(blob);
+
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = 'MHS_CV.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                // Cleanup
+                window.URL.revokeObjectURL(blobUrl);
+            } catch (error) {
+                console.error('Download failed:', error);
+                // Fallback: just open it
+                window.location.href = url;
+            } finally {
+                // Restore button
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.opacity = '1';
+                }, 1000);
+            }
+        });
     </script>
 </body>
 
