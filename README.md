@@ -24,9 +24,9 @@ This repository contains the source code for my personal portfolio, showcasing m
 
 ## 📬 Contact
 Feel free to reach out to me for collaborations or just a friendly hello!
-- **Email**: [Your Email Here]
-- **LinkedIn**: [Your LinkedIn Profile]
-- **GitHub**: [Your GitHub Profile]
+- **Email**: hassansiddiquis486@gmail.com
+- **LinkedIn**: https://github.com/Hassansidiqui
+- **GitHub**: https://github.com/Hassansidiqui
 
 ---
 *© 2024 MHS. All Rights Reserved.*
